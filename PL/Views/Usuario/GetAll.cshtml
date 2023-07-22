@@ -1,0 +1,66 @@
+﻿﻿@model ML.Usuario
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>GetAll</h2>
+
+<h2 style="text-align: center; color:aqua">GetAll Usuarios </h2>
+<div class="container">
+    
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Seleccione un Usuario para editarlo o + para agregar...</h5>
+            <hr/>
+        </div>
+    </div>
+
+</div>
+
+<div style="float:right;">
+    @Html.ActionLink("Agregar", "Form", "Departamento", htmlAttributes: new { @class = "btn btn-success" })
+</div>
+
+<br>
+<br>
+
+<table class="table table-hover table-bordered table-responsive">
+    <thead>
+        <tr class="table-secondary">
+            @*<td>Editar</td>*@
+            <td style="display :none;">IdUsuario</td>
+            <td style="display :none;">IdSupervisor</td>
+            <td>Nombre</td>
+            <td>ApellidoPaterno</td>
+            <td>ApellidoMaterno</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ML.Usuario usuario in Model.Usuarios)
+        {
+            <tr>
+                @*<td style="text-align: center; vertical-align: middle;"><a class="glyphicon glyphicon-pencil" href="@Url.Action("Form", "Departamento", new { IdDepartamento = departamento.IdDepartamento  })"><i class="bi bi-pencil-square" style="color: aqua"></i></a></td>*@
+                <td style="display :none;">@usuario.IdUsuario </td>
+                <td style="display :none;">@usuario.Supervisor.IdSupervisor </td>
+
+                <td>@usuario.Nombre</td>
+                <td>@usuario.ApellidoPaterno</td>
+                <td>@usuario.ApellidoMaterno</td>
+
+
+
+
+
+
+
+                @*<td style="text-align: center; vertical-align: middle;"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Departamento", new { IdDepartamento= departamento.IdDepartamento})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-eraser-fill" style="color: mintcream"></i></a></td>*@
+            </tr>
+        }
+
+    </tbody>
+</table>
+
