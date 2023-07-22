@@ -188,6 +188,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Usuario\GetAll.cshtml" />
     <Content Include="Views\Usuario\GetAllAsignaciones.cshtml" />
+    <Content Include="Views\Usuario\GetAllEquipos.cshtml" />
+    <Content Include="Views\Usuario\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

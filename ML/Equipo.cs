@@ -21,7 +21,7 @@ namespace ML
         public Marca Marca { get; set; }
         public TipoEquipo TipoEquipo { get; set; }
 
-        public Area Area { get; set; }
+        //public Area Area { get; set; }
 
         public List<object> Equipos { get; set; }
 

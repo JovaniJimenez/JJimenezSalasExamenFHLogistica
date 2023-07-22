@@ -1,26 +1,17 @@
-﻿﻿@model ML.Asignacion
-
+﻿@model ML.Equipo
 @{
-    ViewBag.Title = "GetAllAsignaciones";
+    ViewBag.Title = "GetAllEquipos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 style="text-align: center; color:aqua">Asignaciones </h2>
-@*<div class="container">
 
 
-    <div class="row">
-        <div class="col-md-12">
-            <h5>Seleccione un Usuario para editarlo o + para agregar...</h5>
-            <hr />
-        </div>
-    </div>
+<h2 style="text-align: center; color:aqua">Equipos </h2>
 
-</div>*@
 
-<div style="float:right;">
+@*<div style="float:right;">
     @Html.ActionLink("Agregar", "Form", "Departamento", htmlAttributes: new { @class = "btn btn-success" })
-</div>
+</div>*@
 
 <br>
 <br>
@@ -29,32 +20,26 @@
     <thead>
         <tr class="table-secondary">
             @*<td>Editar</td>*@
-            <td style="display :none;">IdUsuario</td>
-            <td style="display :none;">IdSupervisor</td>
-            <td>Nombre</td>
-            <td>Area</td>
-            <td>Marca</td>
-
+            <td style="display :none;">IdEquipo</td>
+            <td style="display :none;">IdTipoEquipo</td>
             <td>Modelo</td>
-            <td>FechaAsignada</td>
+            <td>ClaveInventario</td>
+            <td>NombreTipo</td>
 
         </tr>
     </thead>
     <tbody>
-        @foreach (ML.Asignacion asignaciones in Model.Asignaciones)
+        @foreach (ML.Equipo equipo in Model.Equipos)
         {
             <tr>
                 @*<td style="text-align: center; vertical-align: middle;"><a class="glyphicon glyphicon-pencil" href="@Url.Action("Form", "Departamento", new { IdDepartamento = departamento.IdDepartamento  })"><i class="bi bi-pencil-square" style="color: aqua"></i></a></td>*@
-                <td style="display :none;">@asignaciones.IdAsignacion </td>
-                <td style="display :none;">@asignaciones.Usuario.IdUsuario </td>
+                <td style="display :none;">@equipo.IdEquipo </td>
+                <td style="display :none;">@equipo.TipoEquipo.IdTipoEquipo </td>
 
-                <td>@asignaciones.Usuario.Nombre</td>
-                <td>@asignaciones.Area.Descripccion</td>
+                <td>@equipo.Modelo</td>
+                <td>@equipo.ClaveInventario</td>
+                <td>@equipo.TipoEquipo.NombreTipo</td>
 
-                <td>@asignaciones.Marca.NombreMarca</td>
-
-                <td>@asignaciones.Equipo.Modelo</td>
-                <td>@asignaciones.FechaAsignada</td>
 
 
 

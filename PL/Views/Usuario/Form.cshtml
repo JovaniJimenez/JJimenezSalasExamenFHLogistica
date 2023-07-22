@@ -1,0 +1,82 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Form</h2>
+
+<h2 class="text-dark">Formulario de Departamento</h2>
+<div class="row">
+
+    <div class="col-md-12">
+
+        @using (Html.BeginForm("Form", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <div class="row">
+
+                <div class="col" style="display: none;">
+                    @Html.LabelFor(model => model.IdUsuario, new { @class = "visually-hidden" })
+
+                    @Html.TextBoxFor(model => model.IdUsuario, new { @class = "visually-hidden form-control" })
+
+                    @Html.ValidationMessageFor(model => model.IdUsuario)
+
+                </div>
+
+                <div class="col-4">
+                    @Html.LabelFor(model => model.Nombre)
+
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @Nombre = "txtNombre" })
+
+                    @Html.ValidationMessageFor(model => model.Nombre)
+                </div>
+
+                <div class="col-4">
+                    @Html.LabelFor(model => model.ApellidoPaterno)
+
+                    @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @Nombre = "txtNombre" })
+
+                    @Html.ValidationMessageFor(model => model.ApellidoPaterno)
+                </div>
+                <div class="col-4">
+                    @Html.LabelFor(model => model.ApellidoMaterno)
+
+                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @Nombre = "txtNombre" })
+
+                    @Html.ValidationMessageFor(model => model.ApellidoMaterno)
+                </div>
+
+                <div class="col-4">
+                    @Html.LabelFor(model => model.FechaIngreso)
+
+                    @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "form-control", @Nombre = "txtNombre" })
+
+                    @Html.ValidationMessageFor(model => model.FechaIngreso)
+                </div>
+
+
+                @*<div class="col-4">
+            @Html.LabelFor(model => model.Area)
+
+            @Html.DropDownListFor(Model => Model.Area.IdArea, new SelectList(Model.Area.Areas, "IdArea", "Nombre"), "Selecciona una Opcion", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Area.IdArea)
+        </div>*@
+                <br>
+
+                <div class="col-4">
+
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+
+                    @Html.ActionLink("Regresar", "GetAll", "Usuario", htmlAttributes: new { @class = "btn btn-danger" })
+                </div>
+
+
+            </div>
+
+        }
+
+    </div>
+
+</div>
