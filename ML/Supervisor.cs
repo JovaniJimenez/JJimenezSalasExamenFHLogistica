@@ -12,7 +12,7 @@ namespace ML
 
         public string NombreSupervisor { get; set; }
 
-
+        public Usuario Usuario { get; set; }
         public List<object> Supervisores { get; set; }
     }
 }

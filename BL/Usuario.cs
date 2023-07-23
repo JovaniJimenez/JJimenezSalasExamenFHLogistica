@@ -252,7 +252,7 @@ namespace BL
                         int RowsAffected = cmd.ExecuteNonQuery();
 
 
-                        if (RowsAffected > 1)
+                        if (RowsAffected > 0)
                         {
                             result.Correct = true;
                         }
@@ -309,16 +309,18 @@ namespace BL
                             //Estrutura de control -foreach 
                             if (tableUsuario.Rows.Count > 0)
                             {
-                                DataRow row = tableUsuario.Rows[6];//0
+                                DataRow row = tableUsuario.Rows[0];//0
 
                                 ML.Usuario usuario = new ML.Usuario();
+                                usuario.Supervisor = new Supervisor();
                                 usuario.IdUsuario = int.Parse(row[0].ToString());
                                 usuario.Supervisor.IdSupervisor = int.Parse(row[1].ToString());
+                                usuario.Supervisor.NombreSupervisor =  row[2].ToString();
 
-                                usuario.Nombre = row[2].ToString();
-                                usuario.ApellidoPaterno = row[3].ToString();
-                                usuario.ApellidoMaterno = row[4].ToString();
-                                usuario.FechaIngreso = DateTime.Parse(row[5].ToString());
+                                usuario.Nombre = row[3].ToString();
+                                usuario.ApellidoPaterno = row[4].ToString();
+                                usuario.ApellidoMaterno = row[5].ToString();
+                                usuario.FechaIngreso = DateTime.Parse(row[6].ToString());
                                 
 
                                 result.Object = usuario; //boxing
@@ -364,7 +366,7 @@ namespace BL
                         cmd.CommandType = CommandType.StoredProcedure;
 
 
-                        SqlParameter[] collection = new SqlParameter[8];//numero de datos a procesar
+                        SqlParameter[] collection = new SqlParameter[6];//numero de datos a procesar
                         collection[0] = new SqlParameter("IdUsuario", SqlDbType.Int);
                         collection[0].Value = usuario.IdUsuario;
                         collection[1] = new SqlParameter("IdSupervisor", SqlDbType.Int);
@@ -389,7 +391,7 @@ namespace BL
                         int RowsAffected = cmd.ExecuteNonQuery();
 
 
-                        if (RowsAffected > 1)
+                        if (RowsAffected > 0)
                         {
                             result.Correct = true;
                         }
@@ -414,6 +416,67 @@ namespace BL
 
             return result;
         }
+
+
+
+        public static ML.Result GetSupervisor()
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (SqlConnection context = new SqlConnection(DL.Conexion.GetConection()))
+                {
+                    string query = "GetSupervisor";
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = context;
+                        cmd.CommandText = query;
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+
+                        DataTable tableDenominacion = new DataTable();
+
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                        da.Fill(tableDenominacion);
+
+                        if (tableDenominacion.Rows.Count > 0)
+                        {
+                            result.Objects = new List<object>();
+                            foreach (DataRow row in tableDenominacion.Rows)
+                            {
+
+                                ML.Supervisor supervisor = new ML.Supervisor();
+                                supervisor.IdSupervisor = int.Parse(row[0].ToString());
+                                supervisor.NombreSupervisor = row[1].ToString();
+                              
+
+
+                                result.Objects.Add(supervisor);
+                            }
+
+                            result.Correct = true;
+                        }
+                        else
+                        {
+                            result.Correct = false;
+                            result.ErrorMessage = " No existen registros en la tabla";
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+            return result;
+        }
+
+
 
 
     }

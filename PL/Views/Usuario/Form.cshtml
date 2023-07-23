@@ -51,18 +51,19 @@
                 <div class="col-4">
                     @Html.LabelFor(model => model.FechaIngreso)
 
-                    @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "form-control", @Nombre = "txtNombre" })
+                    @Html.TextBoxFor(model => model.FechaIngreso, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
+
 
                     @Html.ValidationMessageFor(model => model.FechaIngreso)
                 </div>
 
 
-                @*<div class="col-4">
-            @Html.LabelFor(model => model.Area)
+                <div class="col-4">
+            @Html.LabelFor(model => model.Supervisor)
 
-            @Html.DropDownListFor(Model => Model.Area.IdArea, new SelectList(Model.Area.Areas, "IdArea", "Nombre"), "Selecciona una Opcion", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Area.IdArea)
-        </div>*@
+            @Html.DropDownListFor(Model => Model.Supervisor.IdSupervisor, new SelectList(Model.Supervisor.Supervisores, "IdSupervisor", "NombreSupervisor"), "Selecciona una Opcion", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Supervisor.IdSupervisor)
+        </div>
                 <br>
 
                 <div class="col-4">

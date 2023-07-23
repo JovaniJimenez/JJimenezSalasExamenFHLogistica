@@ -43,7 +43,7 @@
         @foreach (ML.Usuario usuario in Model.Usuarios)
         {
             <tr>
-                <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Producto", new { IdUsuario = usuario.IdUsuario })"></a></td>
+                <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Usuario", new { IdUsuario = usuario.IdUsuario })"></a></td>
                 <td style="display :none;">@usuario.IdUsuario </td>
                 <td style="display :none;">@usuario.Supervisor.IdSupervisor </td>
 

@@ -8,7 +8,6 @@ namespace PL.Controllers
 {
     public class UsuarioController : Controller
     {
-        GET: Usuario
         public ActionResult Index()
         {
             return View();
@@ -16,7 +15,6 @@ namespace PL.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
-            ML.Departamento departamento = new ML.Departamento();
             ML.Result result = BL.Usuario.GetUsuario();
             ML.Usuario usuario = new ML.Usuario();
             if (result.Correct)
@@ -34,7 +32,6 @@ namespace PL.Controllers
         [HttpGet]
         public ActionResult GetAllAsignaciones()
         {
-            ML.Departamento departamento = new ML.Departamento();
             ML.Result result = BL.Usuario.GetUsuarioaAsiganciones();
             ML.Asignacion asignacion = new ML.Asignacion();
             if (result.Correct)
@@ -52,7 +49,6 @@ namespace PL.Controllers
         [HttpGet]
         public ActionResult GetAllEquipos()
         {
-            ML.Departamento departamento = new ML.Departamento();
             ML.Result result = BL.Usuario.GetEquipos();
             ML.Equipo equipo = new ML.Equipo();
             if (result.Correct)
@@ -111,14 +107,14 @@ namespace PL.Controllers
         [HttpGet]
         public ActionResult Form(int? idUsuario)
         {
-            //ML.Result resultAre = BL.Area.GetAll();
+            ML.Result resultAre = BL.Usuario.GetSupervisor();
             ML.Usuario usuario = new ML.Usuario();
-            //departamento.Area = new ML.Area();
+            usuario.Supervisor = new ML.Supervisor();
 
-            //if (resultAre.Correct)
-            //{
-            //    departamento.Area.Areas = resultAre.Objects;
-            //}
+            if (resultAre.Correct)
+            {
+                usuario.Supervisor.Supervisores = resultAre.Objects;
+            }
 
 
 
@@ -138,7 +134,7 @@ namespace PL.Controllers
                 if (result.Correct)
                 {
                     usuario = (ML.Usuario)result.Object;
-                    //departamento.Area.Areas = resultAre.Objects;
+                    usuario.Supervisor.Supervisores = resultAre.Objects;
                     return View(usuario);
 
                 }
