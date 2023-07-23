@@ -28,7 +28,7 @@
 <table class="table table-hover table-bordered table-responsive">
     <thead>
         <tr class="table-secondary">
-            @*<td>Editar</td>*@
+            <td>Editar</td>
             <td style="display :none;">IdUsuario</td>
             <td style="display :none;">IdSupervisor</td>
             <td>Nombre</td>
@@ -43,8 +43,12 @@
     <tbody>
         @foreach (ML.Asignacion asignaciones in Model.Asignaciones)
         {
+
             <tr>
-                @*<td style="text-align: center; vertical-align: middle;"><a class="glyphicon glyphicon-pencil" href="@Url.Action("Form", "Departamento", new { IdDepartamento = departamento.IdDepartamento  })"><i class="bi bi-pencil-square" style="color: aqua"></i></a></td>*@
+                <td>
+                    <a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("DeleteAsignacion", "Usuario", new { IdAsignacion = asignaciones.IdAsignacion })">Eliminar Asignacion</a>
+
+                </td>
                 <td style="display :none;">@asignaciones.IdAsignacion </td>
                 <td style="display :none;">@asignaciones.Usuario.IdUsuario </td>
 
@@ -61,7 +65,6 @@
 
 
 
-                @*<td style="text-align: center; vertical-align: middle;"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Departamento", new { IdDepartamento= departamento.IdDepartamento})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-eraser-fill" style="color: mintcream"></i></a></td>*@
             </tr>
         }
 

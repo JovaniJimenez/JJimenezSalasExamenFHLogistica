@@ -1,0 +1,62 @@
+﻿@model ML.Asignacion
+@{
+    ViewBag.Title = "GetEquipoSinAsignar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetEquipoSinAsignar</h2>
+
+
+<h2>Form</h2>
+
+<h2 class="text-dark">Formulario de Departamento</h2>
+<div class="row">
+
+    <div class="col-md-12">
+
+        @using (Html.BeginForm("GetEquipoSinAsignar", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <div class="row">
+
+                <div class="col" style="display: none;">
+                    @Html.LabelFor(model => model.Asignaciones, new { @class = "visually-hidden" })
+
+                    @Html.TextBoxFor(model => model.IdAsignacion, new { @class = "visually-hidden form-control" })
+
+                    @Html.ValidationMessageFor(model => model.IdAsignacion)
+
+                </div>
+
+                <div class="col-4" style="display:none;">
+                    @Html.LabelFor(model => model.Usuario.IdUsuario)
+
+                    @Html.TextBoxFor(model => model.Usuario.IdUsuario, new { @class = "form-control", @Nombre = "txtNombre" })
+
+                    @Html.ValidationMessageFor(model => model.Usuario.IdUsuario)
+                </div>
+
+             
+
+
+                <div class="col-4">
+                    @Html.LabelFor(model => model.Equipo, "Equipo Disponibles")
+
+                    @Html.DropDownListFor(Model => Model.Equipo.IdEquipo, new SelectList(Model.Equipo.Equipos, "IdEquipo", "Modelo"), "Selecciona una Opcion", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Equipo.IdEquipo)
+                </div>
+                <br>
+
+                <div class="col-4">
+
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+
+                    @Html.ActionLink("Regresar", "GetAll", "Usuario", htmlAttributes: new { @class = "btn btn-danger" })
+                </div>
+
+
+            </div>
+
+        }
+
+    </div>

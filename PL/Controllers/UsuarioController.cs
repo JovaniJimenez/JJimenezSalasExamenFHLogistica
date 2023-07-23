@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ML;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -149,5 +150,102 @@ namespace PL.Controllers
 
             }
         }
+
+
+
+
+
+        [HttpPost]
+        public ActionResult GetEquipoSinAsignar(ML.Asignacion asignacion)
+        {
+            ML.Result result = new ML.Result();
+
+            //add o update
+            if (asignacion.IdAsignacion == 0)
+            {
+                //add
+                result = BL.Usuario.AddUsuarioEquipo(asignacion);
+                if (result.Correct)
+                {
+                    ViewBag.Message = "Se inserto correctamente el Equipo al usuario";
+                }
+                else
+                {
+                    ViewBag.Message = "Ocurrio un error al insertar el Usuario" + result.ErrorMessage;
+                }
+
+
+            }
+            else
+            {
+                //result = BL.Usuario.UpdateUsuarioEquipo(asignacion);
+                if (result.Correct)
+                {
+                    ViewBag.Message = "Se Actualizo correctamente el Usuario";
+                }
+                else
+                {
+                    ViewBag.Message = "Ocurrio un error al actualizo el Usuario" + result.ErrorMessage;
+                }
+                //update
+
+
+            }
+            return View("Modal");
+        }
+        [HttpGet]
+        public ActionResult GetEquipoSinAsignar(int? idAsignacion, int IdUsuario)
+        {
+            ML.Result resultAre = BL.Usuario.GetEquipoSinAsignar();
+            ML.Asignacion asignacion = new ML.Asignacion();
+            asignacion.Equipo = new ML.Equipo();
+            asignacion.Usuario = new ML.Usuario();
+            asignacion.Usuario.IdUsuario=IdUsuario; 
+
+            if (resultAre.Correct)
+            {
+
+                asignacion.Equipo.Equipos = resultAre.Objects;
+            }
+
+
+
+
+            if (idAsignacion == null)
+            {
+
+                return View(asignacion);
+
+            }
+           
+
+
+                return View(asignacion);
+
+
+            }
+
+        [HttpGet]
+        public ActionResult DeleteAsignacion(int IdAsignacion)
+        {
+            if(IdAsignacion > 0)
+            {
+                BL.Usuario.DeleteAsignacion(IdAsignacion);
+
+
+                return View("Modal");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+
     }
+
+
+  
+
 }
+

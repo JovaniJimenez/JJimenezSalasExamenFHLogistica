@@ -191,6 +191,7 @@
     <Content Include="Views\Usuario\GetAllEquipos.cshtml" />
     <Content Include="Views\Usuario\Form.cshtml" />
     <Content Include="Views\Usuario\Modal.cshtml" />
+    <Content Include="Views\Usuario\GetEquipoSinAsignar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

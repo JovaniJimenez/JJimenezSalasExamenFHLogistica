@@ -477,6 +477,170 @@ namespace BL
         }
 
 
+        public static ML.Result GetEquipoSinAsignar()
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (SqlConnection context = new SqlConnection(DL.Conexion.GetConection()))
+                {
+                    string query = "EquiposSinAsignar";
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = context;
+                        cmd.CommandText = query;
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+
+                        DataTable tableDenominacion = new DataTable();
+
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                        da.Fill(tableDenominacion);
+
+                        if (tableDenominacion.Rows.Count > 0)
+                        {
+                            result.Objects = new List<object>();
+                            foreach (DataRow row in tableDenominacion.Rows)
+                            {
+
+                                ML.Equipo equipo = new ML.Equipo();
+                                equipo.IdEquipo = int.Parse(row[0].ToString());
+                                equipo.Modelo = row[1].ToString();
+                                equipo.ClaveInventario = row[2].ToString();
+
+
+
+                                result.Objects.Add(equipo);
+                            }
+
+                            result.Correct = true;
+                        }
+                        else
+                        {
+                            result.Correct = false;
+                            result.ErrorMessage = " No existen registros en la tabla";
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+            return result;
+        }
+
+        public static ML.Result AddUsuarioEquipo(ML.Asignacion asignacion)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+
+
+                //string Nombre, string ApellidoPaterno,string Correo, int Edad, string Domicilio
+                using (SqlConnection context = new SqlConnection(DL.Conexion.GetConection()))
+                {
+                    string query = "AddAsignar";
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandText = query;
+                        cmd.Connection = context;
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+
+                        SqlParameter[] collection = new SqlParameter[2];//numero de datos a procesar
+                        collection[0] = new SqlParameter("IdEquipo", SqlDbType.Int);
+                        collection[0].Value = asignacion.Equipo.IdEquipo;
+                        collection[1] = new SqlParameter("IdUsuario", SqlDbType.Int);
+                        collection[1].Value = asignacion.Usuario.IdUsuario;
+
+                       
+
+                        cmd.Parameters.AddRange(collection);
+
+                        cmd.Connection.Open();
+
+                        int RowsAffected = cmd.ExecuteNonQuery();
+
+
+                        if (RowsAffected > 0)
+                        {
+                            result.Correct = true;
+                        }
+                        else
+                        {
+                            result.Correct = false;
+                            result.ErrorMessage = "Ocurrió un error al ingresarla asignar";
+                        }
+
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Ocurrió un error al ingresar el usuario";
+            }
+            return result;
+
+        }
+
+
+
+        public static ML.Result DeleteAsignacion(int IdAsignacion)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (SqlConnection context = new SqlConnection(DL.Conexion.GetConection()))
+                {
+                    string query = "DeleteAsignacion";
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandText = query;
+                        cmd.Connection = context;
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        SqlParameter[] collection = new SqlParameter[1];
+                        collection[0] = new SqlParameter("IdAsignacion", SqlDbType.Int);
+                        collection[0].Value = IdAsignacion;
+                        cmd.Parameters.AddRange(collection);
+                        cmd.Connection.Open();
+                        int RowAffected = cmd.ExecuteNonQuery();
+
+                        if (RowAffected > 1)
+                        {
+                            result.Correct = true;
+                        }
+                        else
+                        {
+                            result.Correct = false;
+                            result.ErrorMessage = "Ocurrió un error al Eliminar la Asignacion";
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Ocurrió un error al Eliminar el usuario CP";
+            }
+
+
+            return result;
+        }
+
 
 
     }
