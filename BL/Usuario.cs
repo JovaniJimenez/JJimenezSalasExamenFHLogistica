@@ -313,14 +313,14 @@ namespace BL
 
                                 ML.Usuario usuario = new ML.Usuario();
                                 usuario.Supervisor = new Supervisor();
-                                usuario.IdUsuario = int.Parse(row[0].ToString());
-                                usuario.Supervisor.IdSupervisor = int.Parse(row[1].ToString());
-                                usuario.Supervisor.NombreSupervisor =  row[2].ToString();
+                                //usuario.IdUsuario = int.Parse(row[0].ToString());
+                                usuario.Supervisor.IdSupervisor = int.Parse(row[0].ToString());
+                                usuario.Supervisor.NombreSupervisor =  row[1].ToString();
 
-                                usuario.Nombre = row[3].ToString();
-                                usuario.ApellidoPaterno = row[4].ToString();
-                                usuario.ApellidoMaterno = row[5].ToString();
-                                usuario.FechaIngreso = DateTime.Parse(row[6].ToString());
+                                usuario.Nombre = row[2].ToString();
+                                usuario.ApellidoPaterno = row[3].ToString();
+                                usuario.ApellidoMaterno = row[4].ToString();
+                                usuario.FechaIngreso = DateTime.Parse(row[5].ToString());
                                 
 
                                 result.Object = usuario; //boxing
@@ -554,13 +554,18 @@ namespace BL
                         cmd.CommandType = CommandType.StoredProcedure;
 
 
-                        SqlParameter[] collection = new SqlParameter[2];//numero de datos a procesar
+                        SqlParameter[] collection = new SqlParameter[3];//numero de datos a procesar
                         collection[0] = new SqlParameter("IdEquipo", SqlDbType.Int);
                         collection[0].Value = asignacion.Equipo.IdEquipo;
                         collection[1] = new SqlParameter("IdUsuario", SqlDbType.Int);
                         collection[1].Value = asignacion.Usuario.IdUsuario;
+                        collection[2] = new SqlParameter("Comentario", SqlDbType.VarChar);
+                        collection[2].Value = asignacion.Comentario;
 
-                       
+
+
+
+
 
                         cmd.Parameters.AddRange(collection);
 

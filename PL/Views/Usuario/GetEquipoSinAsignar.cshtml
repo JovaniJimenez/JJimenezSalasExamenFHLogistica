@@ -4,59 +4,97 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GetEquipoSinAsignar</h2>
+<h2 class="text-center">Asignación de Equipos</h2>
+<br>
 
 
-<h2>Form</h2>
 
-<h2 class="text-dark">Formulario de Departamento</h2>
 <div class="row">
-
     <div class="col-md-12">
+        <h5>Modulo para Asignar un Equipo al Usuario.</h5>
+        <hr />
+    </div>
+</div>
 
-        @using (Html.BeginForm("GetEquipoSinAsignar", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
+
+
+@using (Html.BeginForm("GetEquipoSinAsignar", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="container ">
+        <div class="row">
+
+            <div class="col-md-2" style="display: none;">
+                @Html.LabelFor(model => model.Asignaciones, new { @class = "visually-hidden" })
+
+                @Html.TextBoxFor(model => model.IdAsignacion, new { @class = "visually-hidden form-control" })
+
+                @Html.ValidationMessageFor(model => model.IdAsignacion)
+
+            </div>
+
+            <div class="col-md-2" style="display: none;">
+                @Html.LabelFor(model => model.Usuario.IdUsuario, new { @class = "visually-hidden" })
+
+                @Html.TextBoxFor(model => model.Usuario.IdUsuario, new { @class = "visually-hidden form-control" })
+
+                @Html.ValidationMessageFor(model => model.Usuario.IdUsuario)
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-2" style="margin-bottom:20px;">
+                @Html.LabelFor(model => model.Equipo, "Equipo Disponibles")
+
+                @Html.DropDownListFor(Model => Model.Equipo.IdEquipo, new SelectList(Model.Equipo.Equipos, "IdEquipo", "Modelo"), "Selecciona una Opcion", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Equipo.IdEquipo)
+            </div>
+            <br>
+
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.Comentario)
+
+                @Html.TextBoxFor(model => model.Comentario, new { @class = "form-control", @Nombre = "txtComentario" })
+
+                @Html.ValidationMessageFor(model => model.Comentario)
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
 
             <div class="row">
-
-                <div class="col" style="display: none;">
-                    @Html.LabelFor(model => model.Asignaciones, new { @class = "visually-hidden" })
-
-                    @Html.TextBoxFor(model => model.IdAsignacion, new { @class = "visually-hidden form-control" })
-
-                    @Html.ValidationMessageFor(model => model.IdAsignacion)
-
-                </div>
-
-                <div class="col-4" style="display:none;">
-                    @Html.LabelFor(model => model.Usuario.IdUsuario)
-
-                    @Html.TextBoxFor(model => model.Usuario.IdUsuario, new { @class = "form-control", @Nombre = "txtNombre" })
-
-                    @Html.ValidationMessageFor(model => model.Usuario.IdUsuario)
-                </div>
-
-             
-
-
-                <div class="col-4">
-                    @Html.LabelFor(model => model.Equipo, "Equipo Disponibles")
-
-                    @Html.DropDownListFor(Model => Model.Equipo.IdEquipo, new SelectList(Model.Equipo.Equipos, "IdEquipo", "Modelo"), "Selecciona una Opcion", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Equipo.IdEquipo)
-                </div>
-                <br>
-
-                <div class="col-4">
-
+                <div class="col-md-2">
                     <input type="submit" value="Guardar" class="btn btn-success" />
 
                     @Html.ActionLink("Regresar", "GetAll", "Usuario", htmlAttributes: new { @class = "btn btn-danger" })
                 </div>
-
-
             </div>
+        </div>
 
-        }
 
-    </div>
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+}
+
+
+
+<style>
+    body {
+        background: #d9a7c7; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #fffcdc, #d9a7c7); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #fffcdc, #d9a7c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+</style>

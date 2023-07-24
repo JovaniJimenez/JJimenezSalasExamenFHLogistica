@@ -158,36 +158,23 @@ namespace PL.Controllers
         [HttpPost]
         public ActionResult GetEquipoSinAsignar(ML.Asignacion asignacion)
         {
+
             ML.Result result = new ML.Result();
 
-            //add o update
             if (asignacion.IdAsignacion == 0)
             {
-                //add
-                result = BL.Usuario.AddUsuarioEquipo(asignacion);
-                if (result.Correct)
-                {
-                    ViewBag.Message = "Se inserto correctamente el Equipo al usuario";
-                }
-                else
-                {
-                    ViewBag.Message = "Ocurrio un error al insertar el Usuario" + result.ErrorMessage;
-                }
+                    result = BL.Usuario.AddUsuarioEquipo(asignacion);
+                    if (result.Correct)
+                    {
+                        ViewBag.Message = "Se Asigno correctamente el Equipo al usuario";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Ocurrio un error al Asignar --  El Motivo es el Usuario ya tiene un Equipo Asignado";
+                    }
 
-
-            }
-            else
-            {
-                //result = BL.Usuario.UpdateUsuarioEquipo(asignacion);
-                if (result.Correct)
-                {
-                    ViewBag.Message = "Se Actualizo correctamente el Usuario";
-                }
-                else
-                {
-                    ViewBag.Message = "Ocurrio un error al actualizo el Usuario" + result.ErrorMessage;
-                }
-                //update
+                
+               
 
 
             }
@@ -231,6 +218,7 @@ namespace PL.Controllers
             if(IdAsignacion > 0)
             {
                 BL.Usuario.DeleteAsignacion(IdAsignacion);
+                ViewBag.Message = "Se Elimino la Asignacion del equipo al usuario" ;
 
 
                 return View("Modal");
