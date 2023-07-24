@@ -41,7 +41,7 @@ namespace PL.Controllers
             }
             else
             {
-                ViewBag.Message = "Ocurrio un error al hacer la consulta de Usuarios" + result.ErrorMessage;
+                ViewBag.Message = "Ocurrio un error al hacer la consulta" + result.ErrorMessage;
             }
             return View(asignacion);
 
@@ -58,7 +58,7 @@ namespace PL.Controllers
             }
             else
             {
-                ViewBag.Message = "Ocurrio un error al hacer la consulta de Usuarios" + result.ErrorMessage;
+                ViewBag.Message = "Ocurrio un error al hacer la consulta de Equipos" + result.ErrorMessage;
             }
             return View(equipo);
 

@@ -219,7 +219,6 @@ namespace BL
             {
 
 
-                //string Nombre, string ApellidoPaterno,string Correo, int Edad, string Domicilio
                 using (SqlConnection context = new SqlConnection(DL.Conexion.GetConection()))
                 {
                     string query = "UsuarioAdd";
@@ -543,7 +542,6 @@ namespace BL
             {
 
 
-                //string Nombre, string ApellidoPaterno,string Correo, int Edad, string Domicilio
                 using (SqlConnection context = new SqlConnection(DL.Conexion.GetConection()))
                 {
                     string query = "AddAsignar";
